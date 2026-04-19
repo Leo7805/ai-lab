@@ -74,6 +74,12 @@ This project starts from a pure .NET 10 Minimal API and adds **Swashbuckle.AspNe
 
 ### 🛠️ 1. Updated `.csproj`
 
+Removed the default OpenAPI package:
+
+<ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
+</ItemGroup>
+
 Added the Swashbuckle.AspNetCore package:
 
 ```xml
