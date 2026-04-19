@@ -1,0 +1,117 @@
+# ============================
+# OS
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# Node.js / JavaScript / Express / Spider
+# ============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ignore real env files
+.env
+.env.*
+.env.local
+.env.*.local
+
+# BUT keep env example templates
+!.env.example
+!.env*.example
+
+dist/
+build/
+coverage/
+logs/
+*.log
+
+# PM2 logs
+.pids
+*.pid
+*.seed
+*.pid.lock
+
+# Cache
+.cache/
+.tmp/
+temp/
+
+# ============================
+# VS Code
+# ============================
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# ============================
+# JetBrains / Rider
+# ============================
+.idea/
+*.iml
+*.DotSettings.user
+/_ReSharper.Caches/
+
+# ============================
+# C# / .NET
+# ============================
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pdb
+*.cache
+*.mdb
+*.opendb
+*.svclog
+*.vsp
+*.vspscc
+*.vssscc
+
+# Visual Studio
+.vs/
+
+# ASP.NET
+wwwroot/lib/
+project.lock.json
+project.fragment.lock.json
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# ============================
+# Python (如果你的 spider 用 Python)
+# ============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# ============================
+# Misc
+# ============================
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# ============================
+# Output files (e.g. generated audio files)
+# ============================
+output/
+*.wav
+*.mp3
+*.ogg
