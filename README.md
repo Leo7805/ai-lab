@@ -8,7 +8,12 @@ Each folder contains an independent module with its own README and code, designe
 ## ✅ Implemented Modules
 
 ### Speech
-- [TtsBasic](./Speech/TtsBasic/) — Minimal text‑to‑speech example 
+- [TtsBasic](./Speech/TtsBasic/) — Minimal text‑to‑speech example  
+
+### DotnetLab
+- [00-HelloMinimalApi](./DotnetLab/00-HelloMinimalApi/HelloMinimalApi/) — Pure .NET 10 Minimal API with zero boilerplate  
+- [01-HelloMinimalApiWithSwagger](./DotnetLab/01-HelloMinimalApiWithSwagger/MinimalSwagger/) — Minimal API with Swagger/OpenAPI support via Swashbuckle.AspNetCore
+
 
 ---
 
