@@ -1,4 +1,4 @@
-# tts-basic
+# tts-basic - Node
 
 A minimal Azure Text-to-Speech example.  
 Converts text into audio and saves it as `output.wav`.
