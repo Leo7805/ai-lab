@@ -8,12 +8,15 @@ Each folder contains an independent module with its own README and code, designe
 ## ✅ Implemented Modules
 
 ### Speech
-- [TtsBasic](./Speech/TtsBasic/) — Minimal text‑to‑speech example  
+
+- [BrowserSpeechBasic](./Speech/BrowserSpeechBasic/) — Low-fidelity browser STT and TTS with the Web Speech API
+- [TtsBasic](./Speech/TtsBasic/) — Minimal Azure text-to-speech example
+- [TtsStudio](./Speech/TtsStudio/) — Text-to-speech studio API experiment
 
 ### DotnetLab
-- [00-HelloMinimalApi](./DotnetLab/00-HelloMinimalApi/HelloMinimalApi/) — Pure .NET 10 Minimal API with zero boilerplate  
-- [01-HelloMinimalApiWithSwagger](./DotnetLab/01-HelloMinimalApiWithSwagger/MinimalSwagger/) — Minimal API with Swagger/OpenAPI support via Swashbuckle.AspNetCore
 
+- [00-HelloMinimalApi](./DotnetLab/00-HelloMinimalApi/HelloMinimalApi/) — Pure .NET 10 Minimal API with zero boilerplate
+- [01-HelloMinimalApiWithSwagger](./DotnetLab/01-HelloMinimalApiWithSwagger/MinimalSwagger/) — Minimal API with Swagger/OpenAPI support via Swashbuckle.AspNetCore
 
 ---
 
@@ -23,28 +26,35 @@ Each folder contains an independent module with its own README and code, designe
 ai-lab/
 │
 ├─ Speech/                     # Speech-related modules (STT / TTS / Streaming)
-│   ├─ SttBasic/               # Minimal speech-to-text example
-│   ├─ SttRealtime/            # Real-time STT (WebSocket / streaming)
-│   ├─ TtsBasic/               # Minimal text-to-speech example
-│   ├─ TtsVoices/              # Voice listing, switching, and testing
-│   └─ TtsStreaming/           # Streaming TTS (generate & play in chunks)
+│   ├─ BrowserSpeechBasic/      # Implemented: browser-native low-fidelity STT + TTS
+│   ├─ SttBasic/               # Planned: minimal speech-to-text example
+│   ├─ SttRealtime/            # Planned: real-time STT (WebSocket / streaming)
+│   ├─ TtsBasic/               # Implemented: minimal Azure text-to-speech example
+│   ├─ TtsStudio/              # Implemented: text-to-speech studio API experiment
+│   ├─ TtsVoices/              # Planned: voice listing, switching, and testing
+│   └─ TtsStreaming/           # Planned: streaming TTS (generate & play in chunks)
 │
-├─ Vision/                     # Vision modules (OCR / image processing)
+├─ DotnetLab/                  # .NET API experiments
+│   ├─ 00-HelloMinimalApi/     # Implemented: pure .NET Minimal API
+│   └─ 01-HelloMinimalApiWithSwagger/
+│                               # Implemented: Minimal API with Swagger/OpenAPI
+│
+├─ Vision/                     # Planned vision modules (OCR / image processing)
 │   ├─ OcrBasic/               # Basic OCR example
 │   ├─ OcrScreenshot/          # Screenshot OCR (browser or desktop)
 │   └─ OcrPdf/                 # PDF text/image extraction
 │
-├─ Translation/                # Translation & language utilities
+├─ Translation/                # Planned translation & language utilities
 │   ├─ AzureTranslation/       # Azure translation API examples
 │   ├─ OpenAiTranslation/      # OpenAI-based translation / text processing
 │   └─ BilingualDetection/     # English–Chinese mixed text detection
 │
-├─ Ui/                         # UI components and interaction modules
+├─ Ui/                         # Planned UI components and interaction modules
 │   ├─ FloatingWindow/         # Floating window system (reading assistant UI)
 │   ├─ SelectionPopup/         # Text selection popup (translate / TTS entry)
 │   └─ DraggablePanel/         # Draggable tool panel / utility window
 │
-├─ Agents/                     # Agent / automation / workflow modules
+├─ Agents/                     # Planned agent / automation / workflow modules
 │   ├─ CodeAgent/              # Code-related agent (explain, generate, fix)
 │   ├─ BrowserAgent/           # Browser automation / DOM agent
 │   └─ WorkflowAgent/          # Multi-step workflow agent
@@ -55,10 +65,10 @@ ai-lab/
 
 Each module includes:
 
-- A focused experiment  
-- Minimal setup  
-- A dedicated README  
-- Reusable code for future projects  
+- A focused experiment
+- Minimal setup
+- A dedicated README
+- Reusable code for future projects
 
 ---
 
@@ -70,6 +80,6 @@ This repository serves as a personal sandbox for exploring AI capabilities and b
 
 ## 📄 Notes
 
-- Modules are intentionally small and isolated  
-- No shared dependencies unless explicitly needed  
-- Designed for copy‑paste reuse in real applications  
+- Modules are intentionally small and isolated
+- No shared dependencies unless explicitly needed
+- Designed for copy‑paste reuse in real applications
