@@ -12,6 +12,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
 # Ignore real env files
 .env
@@ -24,10 +25,12 @@ pnpm-debug.log*
 !.env*.example
 
 dist/
+dist-ssr/
 build/
 coverage/
 logs/
 *.log
+*.local
 
 # PM2 logs
 .pids
@@ -103,8 +106,12 @@ venv/
 # ============================
 # Misc
 # ============================
+*.ntvs*
+*.njsproj
+*.sln
 *.swp
 *.swo
+*.sw?
 *.bak
 *.tmp
 
