@@ -50,8 +50,8 @@ app.MapPost("/tts", async (TtsRequest req, IConfiguration config, HttpContext ht
     );
     speechConfig.SpeechSynthesisVoiceName = req.VoiceName ?? settings.VoiceName;
 
-    // Explicitly set WAV output (audio/wav)
-    speechConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Riff16Khz16BitMonoPcm);
+    // MP3 is smaller and tends to be more robust across browser playback pipelines.
+    speechConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Audio24Khz48KBitRateMonoMp3);
 
     // Disable local speaker output on the backend process.
     // We only need the synthesized bytes returned to the frontend.
@@ -72,12 +72,17 @@ app.MapPost("/tts", async (TtsRequest req, IConfiguration config, HttpContext ht
         return Results.Problem(detail, statusCode: 502);
     }
 
+    if (result.AudioData is null || result.AudioData.Length == 0)
+    {
+        return Results.Problem("Speech synthesis returned empty audio data.", statusCode: 502);
+    }
+
     // Prevent any caching (browser/CDN/proxies); ensure each request returns fresh audio
     httpContext.Response.Headers.CacheControl = "no-store";
 
     return Results.File(
         result.AudioData,
-        "audio/wav"
+        "audio/mpeg"
     );
 });
 

@@ -35,13 +35,29 @@ function App() {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to play speech.');
+        let detail = 'Failed to play speech.';
+        try {
+          const errorBody = await res.json();
+          detail = errorBody.detail || detail;
+        } catch {
+          // If response is not JSON, fallback to text
+          detail = await res.text();
+        }
+        throw new Error(detail);
       }
 
-      const blob = await res.blob(); // Get the audio data as a blob
+      // Read the response as an ArrayBuffer and create a Blob for audio playback
+      const audioBuffer = await res.arrayBuffer();
+      if (audioBuffer.byteLength === 0) {
+        throw new Error('Received empty audio data from server.');
+      }
+
+      const contentType = res.headers.get('Content-Type') ?? 'audio/mpeg';
+      const blob = new Blob([audioBuffer], { type: contentType });
+
       audioUrl = URL.createObjectURL(blob); // Create a URL for the audio blob
       const audio = new Audio(audioUrl); // Create an audio element
-      audio.play(); // Play the audio
+      await audio.play(); // Play the audio
 
       await new Promise<void>((resolve, reject) => {
         audio.onended = () => resolve(); // Resolve the promise when audio finishes playing
