@@ -43,7 +43,7 @@ function App() {
       const audio = new Audio(audioUrl); // Create an audio element
       audio.play(); // Play the audio
 
-      await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
         audio.onended = () => resolve(); // Resolve the promise when audio finishes playing
         audio.onerror = () => reject(new Error('Audio playback failed.')); // Handle playback errors
       });
