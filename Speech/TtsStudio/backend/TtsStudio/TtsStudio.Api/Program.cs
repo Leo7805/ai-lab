@@ -4,7 +4,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-
 // Add/register a CORS service
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 builder.Services.AddCors(options =>
@@ -26,13 +25,15 @@ var app = builder.Build();
 app.UseCors("Frontend"); // Start the CORS service: Frontend
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
+// }
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "TtsStudio is running!");
 
 app.MapPost("/tts", async (TtsRequest req, IConfiguration config, HttpContext httpContext) =>
 {

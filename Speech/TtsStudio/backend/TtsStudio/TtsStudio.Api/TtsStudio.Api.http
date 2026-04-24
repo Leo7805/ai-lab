@@ -1,5 +1,10 @@
 @host = http://localhost:5059
 
+###
+GET {{host}}/
+Accept: application/json
+
+###
 POST {{host}}/tts
 Content-Type: application/json
 
@@ -7,5 +12,3 @@ Content-Type: application/json
   "text": "hello world",
   "voiceName": "en-AU-NatashaNeural"
 }
-
-###
