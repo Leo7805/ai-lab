@@ -33,7 +33,7 @@ app.UseCors("Frontend"); // Start the CORS service: Frontend
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/", () => "TtsStudio is running!");
+app.MapGet("/", () => Results.Ok(new { message = "TtsStudio is running!" }));
 
 app.MapPost("/tts", async (TtsRequest req, IConfiguration config, HttpContext httpContext) =>
 {
