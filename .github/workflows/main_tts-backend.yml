@@ -8,12 +8,12 @@ on:
     branches:
       - main
     paths:
-      - 'Speech/TtsStudio/backend/TtsStudio.Api/**'
+      - 'Speech/TtsStudio/backend/TtsStudio/TtsStudio.Api/**'
       - '.github/workflows/main_tts-backend.yml'
   workflow_dispatch:
 
 env:
-  PROJECT_PATH: 'Speech/TtsStudio/backend/TtsStudio.Api/TtsStudio.Api.csproj'
+  PROJECT_PATH: 'Speech/TtsStudio/backend/TtsStudio/TtsStudio.Api/TtsStudio.Api.csproj'
 
 jobs:
   build:
