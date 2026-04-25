@@ -1,82 +1,114 @@
 # auth-ui
 
-A frontend-only authentication UI demo built with Next.js, Tailwind CSS, and shadcn/ui.
+Frontend-only authentication UI demo built with Next.js, Tailwind CSS, and shadcn/ui.
 
-This module focuses on login/register pages and basic navigation flow. It does not include real backend authentication.
+This module focuses on login/register UX and a mock auth navigation flow. It does not include backend authentication.
 
----
+## Goals
 
-## Purpose
-
-- Build a reusable authentication UI template
-- Practise login/register page structure
-- Demonstrate a simple mock auth flow
-- Prepare for future backend integration
-
----
+- Build reusable auth UI pages
+- Practice form validation and page flow
+- Simulate login state and protected navigation
+- Keep the code ready for future API integration
 
 ## Tech Stack
 
-- Next.js
-- React + TypeScript
-- Tailwind CSS
-- shadcn/ui
-  - component library: Radis
-  - preset: Nova
-  - npx shadcn@latest add button input card label
-- lucide-react
-
----
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS 4
+- shadcn/ui CLI (installed as devDependency)
+- lucide-react (icons)
 
 ## Features
 
-- Login page
-- Register page
-- Dashboard page
-- Mock login state
-- Basic redirect flow
+- Login page with:
+  - custom email format validation
+  - password show/hide toggle
+  - Enter-to-submit form behavior
+- Register page with:
+  - name/email/password/confirm-password validation
+  - password and confirm-password show/hide toggles
+- Dashboard page protected by a mock auth check
+- Mock auth state stored in `localStorage`
 
----
-
-## Auth Flow
+## Auth Flow (Mock)
 
 ```text
-User enters email/password
-→ Frontend stores mock login state
-→ User is redirected to dashboard
-```
+Login/Register submit
+-> validate inputs on client
+-> set localStorage key: isLoggedIn=true
+-> redirect to /dashboard
 
----
+Logout
+-> remove localStorage key
+-> redirect to /login
+```
 
 ## Project Structure
 
 ```text
-src/
-├── app/
-│   ├── login/
-│   ├── register/
-│   ├── dashboard/
-│   └── layout.tsx
-├── components/
-├── lib/
-│   └── auth.ts
-└── styles/
+app/
+├── dashboard/
+│   └── page.tsx
+├── login/
+│   └── page.tsx
+├── register/
+│   └── page.tsx
+├── globals.css
+├── layout.tsx
+└── page.tsx
+
+components/
+└── ui/
+    ├── button.tsx
+    ├── card.tsx
+    ├── input.tsx
+    └── label.tsx
+
+hooks/
+└── useAuth.ts
+
+lib/
+└── utils.ts
 ```
 
----
-
-## Run
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
----
+Open `http://localhost:3000`.
 
-## Notes
+## Scripts
 
-- This is not real authentication
-- No backend API is used
-- No JWT or session validation is included
-- This module is mainly for UI and flow practice
+- `npm run dev` - start local dev server
+- `npm run build` - create production build
+- `npm run start` - run production server from built output
+- `npm run lint` - run ESLint
+
+## Pre-deploy Check (Recommended)
+
+```bash
+npm ci
+npm run build
+npm run start
+```
+
+This sequence closely matches CI/Vercel behavior and catches SSR/prerender issues early.
+
+## Notes and Limits
+
+- This is not real authentication.
+- No backend/API, JWT, refresh token, or secure session handling.
+- `localStorage` auth state is for demo only.
+- Guard browser-only APIs (`localStorage`, `window`) for SSR safety.
+
+## Adding shadcn Components
+
+`shadcn` is kept in `devDependencies` as a CLI tool. Example:
+
+```bash
+npx shadcn@latest add button input card label
+```
