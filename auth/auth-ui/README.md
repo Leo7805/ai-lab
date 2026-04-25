@@ -24,6 +24,7 @@ This module focuses on login/register pages and basic navigation flow. It does n
   - component library: Radis
   - preset: Nova
   - npx shadcn@latest add button input card label
+- lucide-react
 
 ---
 
