@@ -21,6 +21,9 @@ This module focuses on login/register pages and basic navigation flow. It does n
 - React + TypeScript
 - Tailwind CSS
 - shadcn/ui
+  - component library: Radis
+  - preset: Nova
+  - npx shadcn@latest add button input card label
 
 ---
 
