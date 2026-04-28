@@ -1,9 +1,10 @@
 # tts-basic - Node
 
-A minimal Azure Text-to-Speech example.  
+A minimal Azure Text-to-Speech example (js version).
 Converts text into audio and saves it as `output.wav`.
 
 ## Setup
+
 1. Copy `.env.example` to `.env`
 2. Fill in your Azure Speech key and region
 
@@ -17,6 +18,6 @@ This module requires the following npm packages:
 - **tsx** — Fast ESM runner with auto‑reload for development (dev‑only)
 
 ## Run
+
 npm install  
 npm start
-
