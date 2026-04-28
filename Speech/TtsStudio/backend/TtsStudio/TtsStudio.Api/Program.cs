@@ -30,4 +30,6 @@ app.MapGet("/", () => Results.Ok(new { message = "TtsStudio is running!" }));
 
 app.MapTtsEndpoints();
 
+app.MapUsageEndpoints();
+
 app.Run();
