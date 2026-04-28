@@ -1,10 +1,13 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
 
 export function UsagePanel() {
+  const now = new Date();
+  const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+
   const usage = {
     provider: 'Azure TTS',
     type: 'TTS',
-    month: '2026-04',
+    month: month,
     requestCount: 123,
     charCount: 8450,
     quota: 50000,

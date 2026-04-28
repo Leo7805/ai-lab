@@ -8,7 +8,7 @@ type ActiveTab = 'tts' | 'usage';
 function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('tts');
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
     setActiveTab(newValue as ActiveTab);
   };
 
