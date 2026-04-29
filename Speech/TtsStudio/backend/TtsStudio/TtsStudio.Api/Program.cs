@@ -1,4 +1,7 @@
+using TtsStudio.Api.Configuration;
 using TtsStudio.Api.Endpoints;
+using TtsStudio.Api.Extensions;
+using TtsStudio.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer(); // Discovers Minimal API endpoints for OpenAPI.
 builder.Services.AddSwaggerGen(); // Generates the Swagger JSON and Swagger UI. (Swashbuckle)
 
+// Register configuration
+builder.Services.Configure<TtsSettings>(builder.Configuration.GetSection("Tts"));
+builder.Services.Configure<AzureSpeechSettings>(builder.Configuration.GetSection("AzureSpeech"));
+
+// Register tts
+builder.Services.AddScoped<TtsService>();
+
 var app = builder.Build();
 
 app.UseCors("Frontend"); // Start the CORS service: Frontend
@@ -25,6 +35,8 @@ app.UseCors("Frontend"); // Start the CORS service: Frontend
 // Add Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseGlobalExceptionHandler();
 
 app.MapGet("/", () => Results.Ok(new { message = "TtsStudio is running!" }));
 

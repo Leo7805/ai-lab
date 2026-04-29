@@ -1,38 +1,22 @@
+using TtsStudio.Api.Errors;
+
 namespace TtsStudio.Api.Configuration;
 
 /// <summary>
-///     Azure Speech configuration wrapper.
-///     Values are loaded from IConfiguration (appsettings.json + user-secrets + env).
+///     Azure Speech configuration.
+///     Values are loaded from appsettings, user-secrets, and environment variables.
 /// </summary>
-public sealed record AzureSpeechSettings(
-    string? Key,
-    string? Region,
-    string? VoiceName)
+public sealed class AzureSpeechSettings
 {
-    public static AzureSpeechSettings FromConfiguration(IConfiguration config)
-    {
-        return new AzureSpeechSettings(
-            config["AzureSpeech:Key"],
-            config["AzureSpeech:Region"],
-            config["AzureSpeech:VoiceName"] ?? "en-AU-NatashaNeural"
-        );
-    }
+    public string Key { get; set; } = string.Empty;
+    public string Region { get; set; } = string.Empty;
 
-    public bool IsValid(out string error)
+    public void Validate()
     {
         if (string.IsNullOrWhiteSpace(Key))
-        {
-            error = "Missing AzureSpeech: Key";
-            return false;
-        }
+            throw new ConfigurationException("Missing AzureSpeech Setting: Key configuration.");
 
         if (string.IsNullOrWhiteSpace(Region))
-        {
-            error = "Missing AzureSpeech: Region";
-            return false;
-        }
-
-        error = string.Empty;
-        return true;
+            throw new ConfigurationException("Missing AzureSpeech Setting: Region configuration.");
     }
 }
