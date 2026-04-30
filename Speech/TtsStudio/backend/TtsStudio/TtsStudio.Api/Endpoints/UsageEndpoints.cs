@@ -8,8 +8,9 @@ public static class UsageEndpoints
     {
         app.MapGet("/usage", () =>
         {
+            var now = DateTime.UtcNow;
             var response = new UsageSummaryResponse(
-                "azure",
+                "Azure",
                 "2026-4",
                 123,
                 8450,

@@ -1,4 +1,5 @@
 using TtsStudio.Api.Configuration;
+using TtsStudio.Api.Data;
 using TtsStudio.Api.Endpoints;
 using TtsStudio.Api.Extensions;
 using TtsStudio.Api.Services;
@@ -29,6 +30,9 @@ builder.Services.Configure<AzureSpeechSettings>(builder.Configuration.GetSection
 builder.Services.AddScoped<TtsService>();
 
 var app = builder.Build();
+
+// Create DB
+await UsageDb.InitializeAsync();
 
 app.UseCors("Frontend"); // Start the CORS service: Frontend
 
