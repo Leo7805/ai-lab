@@ -9,7 +9,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import { getUsageSummary, UsageSummary } from '../services/api';
+import { getUsageSummary, type UsageSummary } from '../services/api';
 
 export function UsagePanel() {
   const [usage, setUsage] = useState<UsageSummary | null>(null);
