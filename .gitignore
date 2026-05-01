@@ -138,3 +138,8 @@ output/
 *.wav
 *.mp3
 *.ogg
+
+# ============================
+# Database files (e.g. SQLite databases)
+# ============================
+TtsStudio.Api/Data/*.db

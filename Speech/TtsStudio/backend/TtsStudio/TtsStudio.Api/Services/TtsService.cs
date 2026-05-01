@@ -38,11 +38,13 @@ public class TtsService
         // 3. Choose voice
         var voiceName = ChooseVoice(request, text);
 
-        // 4. Build SSML
-        var ssml = BuildSsml(text, voiceName, speakingRate);
+        // 4a. Call Azure TTS using text and return audio bytes
+        if (speakingRate == DefaultSpeakingRate)
+            return await SynthesizeAudioAsync(text, voiceName);
 
-        // 5. Call Azure and return audio bytes
-        return await SynthesizeAudioAsync(ssml, voiceName);
+        // 4b. Call Azure using ssml and return audio bytes
+        var ssml = BuildSsml(text, voiceName, speakingRate);
+        return await SynthesizeAudioAsync(ssml, voiceName, true);
     }
 
     private void ValidateRequest(TtsRequest request)
@@ -132,11 +134,11 @@ public class TtsService
         return "en-US";
     }
 
-    private async Task<byte[]> SynthesizeAudioAsync(string ssml, string voiceName)
+    private async Task<byte[]> SynthesizeAudioAsync(string input, string voiceName, bool useSsml = false)
     {
         var speechConfig = SpeechConfig.FromSubscription(_azureSpeechSettings.Key, _azureSpeechSettings.Region);
 
-        speechConfig.SpeechSynthesisVoiceName = voiceName;
+        if (!useSsml) speechConfig.SpeechSynthesisVoiceName = voiceName;
 
         // MP3 is smaller and tends to be more robust across browser playback pipelines.
         speechConfig.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Audio24Khz48KBitRateMonoMp3);
@@ -147,7 +149,9 @@ public class TtsService
         using var synthesizer = new SpeechSynthesizer(speechConfig, null);
 
         // Synthesize the speech
-        var result = await synthesizer.SpeakSsmlAsync(ssml);
+        var result = useSsml
+            ? await synthesizer.SpeakSsmlAsync(input)
+            : await synthesizer.SpeakTextAsync(input);
 
         // Check if synthesis succeeded
         if (result.Reason != ResultReason.SynthesizingAudioCompleted)

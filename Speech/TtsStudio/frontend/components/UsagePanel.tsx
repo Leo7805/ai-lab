@@ -1,27 +1,75 @@
-import { Box, Container, Stack, Typography } from '@mui/material';
+'use client';
+
+import { useEffect, useState } from 'react';
+import {
+  Box,
+  Container,
+  Stack,
+  Typography,
+  CircularProgress,
+  Alert,
+} from '@mui/material';
+import { getUsageSummary, UsageSummary } from '../services/api';
 
 export function UsagePanel() {
-  const now = new Date();
-  const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const [usage, setUsage] = useState<UsageSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const usage = {
-    provider: 'Azure TTS',
-    type: 'TTS',
-    month: month,
-    requestCount: 123,
-    charCount: 8450,
-    quota: 50000,
-  };
+  useEffect(() => {
+    const fetchUsage = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getUsageSummary();
+        setUsage(data);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : 'Failed to load usage data'
+        );
+        console.error('Error fetching usage:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const remaining = usage.quota - usage.charCount;
+    fetchUsage();
+  }, []);
+
+  if (loading) {
+    return (
+      <Container
+        maxWidth="sm"
+        sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}
+      >
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container maxWidth="sm" sx={{ mt: 4 }}>
+        <Alert severity="error">{error}</Alert>
+      </Container>
+    );
+  }
+
+  if (!usage) {
+    return (
+      <Container maxWidth="sm" sx={{ mt: 4 }}>
+        <Alert severity="warning">No usage data available</Alert>
+      </Container>
+    );
+  }
 
   const rows = [
-    ['Type', usage.type],
+    ['Provider', usage.provider],
     ['Month', usage.month],
-    ['Requests', usage.requestCount],
-    ['Characters Used', usage.charCount],
-    ['Quota', usage.quota],
-    ['Remaining', remaining],
+    ['Requests', usage.requestCount.toLocaleString()],
+    ['Characters Used', usage.charCount.toLocaleString()],
+    ['Quota', usage.quotaCharLimit.toLocaleString()],
+    ['Remaining', usage.remainingCharCount.toLocaleString()],
   ];
 
   return (

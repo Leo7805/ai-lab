@@ -1,4 +1,4 @@
-using TtsStudio.Api.Dtos;
+using TtsStudio.Api.Services;
 
 namespace TtsStudio.Api.Endpoints;
 
@@ -6,17 +6,9 @@ public static class UsageEndpoints
 {
     public static IEndpointRouteBuilder MapUsageEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/usage", () =>
+        app.MapGet("/usage", async (UsageService usageService) =>
         {
-            var now = DateTime.UtcNow;
-            var response = new UsageSummaryResponse(
-                "Azure",
-                "2026-4",
-                123,
-                8450,
-                500000,
-                491550
-            );
+            var response = await usageService.GetCurrentMonthSummaryAsync();
             return Results.Ok(response);
         });
 
